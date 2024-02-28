@@ -31,8 +31,8 @@ Turkey Weather Hub is a Spring Boot application that provides weather informatio
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/Damples06/WeatherWebApp.git
-   cd WeatherWebApp
+   git clone https://github.com/Damples06/turkish-weather-hub-spring-boot.git
+   cd TurkeyWeatherHub
    ```
    
 2. **Build and Run:**
