@@ -29,25 +29,29 @@ WeatherWebApp is a Spring Boot application that provides weather information for
 ## Getting Started
 
 1. **Clone the Repository:**
+
    ```bash
    git clone https://github.com/Damples06/WeatherWebApp.git
    cd WeatherWebApp
    ```
    
-2. **Build and Run:**
+3. **Build and Run:**
+
    ```bash
    ./mvnw clean install
    ./mvnw spring-boot:run
    ```
    
-3. **Access the Application:**
+5. **Access the Application:**
 
    Open your web browser and go to http://localhost:8686.
 
 ## Usage
 
 **City Details**
+   
    To retrieve details for a specific city, use the following endpoint:
+   
    ```
       GET /{city-name}
    ```
@@ -56,11 +60,15 @@ WeatherWebApp is a Spring Boot application that provides weather information for
       curl http://localhost:8686/Istanbul
    ```
 **Daily Weather Data**
+   
    To get the daily weather data for a city, use the following endpoint:
+   
    ```
       GET /daily/{city-name}
    ```
+   
    Example:
+   
    ```bash
       curl http://localhost:8686/daily/Istanbul
    ```
@@ -68,6 +76,7 @@ WeatherWebApp is a Spring Boot application that provides weather information for
  ## Configuration
 
    Configure the application properties in application.yml for database connection and external API integration.
+   
    ```yaml
       server:
   port: 8686
