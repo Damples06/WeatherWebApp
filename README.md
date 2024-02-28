@@ -1,6 +1,6 @@
 # Turkey Weather Hub
 
-Turkey Weather Hub is a Spring Boot application that provides weather information for cities. It leverages Spring Data JPA for data persistence and integrates with external weather APIs, including the Turkish State Meteorological Service (MGM), to fetch real-time weather data.
+Turkey Weather Hub is a Spring Boot application that provides weather information for cities. It leverages Spring Data JPA for data persistence and integrates with external weather APIs, including the MGM (Turkish State Meteorological Service), to fetch real-time weather data.
 
 ## Table of Contents
 
