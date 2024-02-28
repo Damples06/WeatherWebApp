@@ -28,7 +28,7 @@ WeatherWebApp is a Spring Boot application that provides weather information for
 
 ## Getting Started
 
-1. **Clone the Repository:**
+   1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/Damples06/WeatherWebApp.git
