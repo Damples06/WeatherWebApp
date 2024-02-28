@@ -48,7 +48,7 @@ WeatherWebApp is a Spring Boot application that provides weather information for
 
 ## Usage
 
-**City Details**
+1. **City Details**
    
    To retrieve details for a specific city, use the following endpoint:
    
