@@ -79,21 +79,20 @@ WeatherWebApp is a Spring Boot application that provides weather information for
    
    ```yaml
       server:
-  port: 8686
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/city
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-
+        port: 8686
+      spring:
+        datasource:
+          url: jdbc:postgresql://localhost:5432/city
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+        jpa:
+          hibernate:
+            ddl-auto: update
+          show-sql: true
+          properties:
+            hibernate:
+              dialect: org.hibernate.dialect.PostgreSQLDialect
    ```
 
 ## Contributing
