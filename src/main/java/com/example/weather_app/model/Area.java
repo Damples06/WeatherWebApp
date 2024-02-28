@@ -1,31 +1,60 @@
 package com.example.weather_app.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.Locale;
+
 @Entity
 @Data
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "cities")
 public class Area {
-
     @Id
-    private Long plakaId;
-    private String merkezId;
+    @JsonProperty("merkezId")
+    private int merkezId;
 
-    private String provinceName;
-    private String districtName;
+    @JsonProperty("il")
+    private String il;
 
-    private String degree;
+    @JsonProperty("ilce")
+    private String ilce;
 
-    private String windSpeed;
-    private String windDirection;
+    @JsonProperty("aciklama")
+    private String aciklama;
 
-    private String humidity;
+    @JsonProperty("boylam")
+    private double boylam;
+
+    @JsonProperty("enlem")
+    private double enlem;
+
+    @JsonProperty("gunlukTahminIstNo")
+    private int gunlukTahminIstNo;
+
+    @JsonProperty("ilPlaka")
+    private int ilPlaka;
+
+    @JsonProperty("saatlikTahminIstNo")
+    private int saatlikTahminIstNo;
+
+    @JsonProperty("sonDurumIstNo")
+    private int sondurumIstNo;
+
+    @JsonProperty("yukseklik")
+    private int yukseklik;
+
+    public void convertToLowerCase() {
+        if (il != null) {
+            this.il = this.il.toLowerCase(new Locale("tr", "TR"));
+        }
+        if (ilce != null) {
+            this.ilce = this.ilce.toLowerCase(new Locale("tr", "TR"));
+        }
+        if (aciklama != null) {
+            this.aciklama = this.aciklama.toLowerCase(new Locale("tr", "TR"));
+        }
+    }
 }
