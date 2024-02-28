@@ -10,7 +10,6 @@ WeatherWebApp is a Spring Boot application that provides weather information for
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -33,3 +32,60 @@ WeatherWebApp is a Spring Boot application that provides weather information for
    ```bash
    git clone https://github.com/Damples06/WeatherWebApp.git
    cd WeatherWebApp
+   ```
+   
+2. **Build and Run:**
+   ```bash
+   ./mvnw clean install
+   ./mvnw spring-boot:run
+   ```
+   
+3. **Access the Application:**
+   Open your web browser and go to http://localhost:8686.
+
+## Usage
+
+**City Details**
+   To retrieve details for a specific city, use the following endpoint:
+   ```
+      GET /{city-name}
+   ```
+   Example:
+   ```bash
+      curl http://localhost:8686/Istanbul
+   ```
+**Daily Weather Data**
+   To get the daily weather data for a city, use the following endpoint:
+   ```
+      GET /daily/{city-name}
+   ```
+   Example:
+   ```bash
+      curl http://localhost:8686/daily/Istanbul
+   ```
+
+ ## Configuration
+
+   Configure the application properties in application.yml for database connection and external API integration.
+   ```yaml
+      server:
+  port: 8686
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/city
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+   ```
+
+## Contributing
+
+   Contributions are welcome! Feel free to open issues and pull requests.
