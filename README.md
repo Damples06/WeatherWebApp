@@ -35,14 +35,14 @@ WeatherWebApp is a Spring Boot application that provides weather information for
    cd WeatherWebApp
    ```
    
-3. **Build and Run:**
+   3. **Build and Run:**
 
    ```bash
    ./mvnw clean install
    ./mvnw spring-boot:run
    ```
    
-5. **Access the Application:**
+   5. **Access the Application:**
 
    Open your web browser and go to http://localhost:8686.
 
