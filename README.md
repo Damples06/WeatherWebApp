@@ -28,7 +28,7 @@ WeatherWebApp is a Spring Boot application that provides weather information for
 
 ## Getting Started
 
-**Clone the Repository:**
+1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/Damples06/WeatherWebApp.git
@@ -48,7 +48,7 @@ WeatherWebApp is a Spring Boot application that provides weather information for
 
 ## Usage
 
-1. **City Details**
+**City Details**
    
    To retrieve details for a specific city, use the following endpoint:
    
