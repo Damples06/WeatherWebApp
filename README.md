@@ -41,6 +41,7 @@ WeatherWebApp is a Spring Boot application that provides weather information for
    ```
    
 3. **Access the Application:**
+
    Open your web browser and go to http://localhost:8686.
 
 ## Usage
