@@ -1,6 +1,6 @@
-# WeatherWebApp
+# Turkey Weather Hub
 
-WeatherWebApp is a Spring Boot application that provides weather information for cities. It leverages Spring Data JPA for data persistence and integrates with external weather APIs to fetch real-time weather data.
+Turkey Weather Hub is a Spring Boot application that provides weather information for cities. It leverages Spring Data JPA for data persistence and integrates with external weather APIs to fetch real-time weather data.
 
 ## Table of Contents
 
