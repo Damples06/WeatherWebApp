@@ -20,11 +20,11 @@ Turkey Weather Hub is a Spring Boot application that provides weather informatio
 
 ## Technologies Used
 
+- Java
 - Spring Boot
 - Spring Data JPA
 - PostgreSQL
 - Lombok
-- Java 17
 
 ## Getting Started
 
