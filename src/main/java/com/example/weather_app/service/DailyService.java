@@ -1,6 +1,5 @@
 package com.example.weather_app.service;
 
-import com.example.weather_app.model.Area;
 import com.example.weather_app.model.Daily;
 import com.example.weather_app.repository.AreaRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,7 +31,7 @@ public class DailyService {
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        List<Daily> dailies = objectMapper.readValue(response.body(), new TypeReference<List<Daily>>() {});
+        List<Daily> dailies = objectMapper.readValue(response.body(), new TypeReference<>() {});
 
         if (!dailies.isEmpty()) {
             Daily daily = dailies.get(0);

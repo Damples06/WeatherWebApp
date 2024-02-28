@@ -44,7 +44,7 @@ public class AreaService {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        List<Area> areas = objectMapper.readValue(response.body(), new TypeReference<List<Area>>() {});
+        List<Area> areas = objectMapper.readValue(response.body(), new TypeReference<>() {});
         Area areaToSave = areas.get(0);
         areaToSave.convertToLowerCase();
         areaRepository.save(areaToSave);
