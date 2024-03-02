@@ -82,20 +82,19 @@ Turkey Weather Hub is a Spring Boot application that provides weather informatio
    
    ```yaml
       server:
-        port: 8686
-      spring:
-        datasource:
-          url: jdbc:postgresql://localhost:5432/city
-          username: postgres
-          password: postgres
-          driver-class-name: org.postgresql.Driver
-        jpa:
-          hibernate:
+  port: 8686
+spring:
+  datasource:
+      url: jdbc:postgresql://localhost:5432/city
+      username: postgres
+      password: postgres
+      driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
             ddl-auto: update
-          show-sql: true
-          properties:
-            hibernate:
-              dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  cache:
+    type: simple
    ```
 
 ## Contributing
