@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,9 +22,14 @@ public class DailyService {
 
     @Autowired
     private final AreaRepository areaRepository;
+    private final AreaService areaService;
     private final ObjectMapper objectMapper;
 
+    @Cacheable(value = "dailyCache", key = "#il")
     public Daily getDailyWeatherData(String il) throws IOException, InterruptedException {
+        if (areaRepository.findByIlIgnoreCase(il) == null) {
+            areaService.getAreaDetails(il);
+        }
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://servis.mgm.gov.tr/web/sondurumlar?merkezid=" + getMerkezIdByIl(il)))

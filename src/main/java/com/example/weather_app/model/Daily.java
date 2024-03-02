@@ -3,17 +3,16 @@ package com.example.weather_app.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@RequiredArgsConstructor
 public class Daily {
     @Id
     @JsonProperty("il")
     private String il;
-
-    @JsonProperty("karYukseklik")
-    private int karYukseklik;
 
     @JsonProperty("nem")
     private int nem;
