@@ -31,8 +31,6 @@ public class Daily5Service {
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         List<Daily5> daily5List = objectMapper.readValue(response.body(), new TypeReference<>() {});
-        Daily5 daily5 = daily5List.get(0);
-        System.out.println(daily5.getDailyId());
-        return daily5;
+        return daily5List.get(0);
     }
 }
