@@ -14,11 +14,10 @@ public class DailyService {
 
     private final Daily5Service daily5Service;
 
-    public List<Daily> getAllDailyData(String il) throws IOException, InterruptedException {
+    public List<Daily> getAllDailyData(String provinceName) throws IOException, InterruptedException {
 
         // Get Daily5 data from Daily5Service
-        Daily5 data = daily5Service.daily5Data(il);
-
+        Daily5 data = daily5Service.daily5Data(provinceName);
 
         // Create Daily objects from Daily5 data
         Daily daily1 = new Daily();
@@ -81,14 +80,18 @@ public class DailyService {
         return dailyList;
     }
 
-    public Daily getSingleDailyData(String il, Integer i) throws IOException, InterruptedException {
-        List<Daily> dailyList = getAllDailyData(il);
+    // Get a single Daily object from the list of Daily objects
+    public Daily getSingleDailyData(String provinceName, Integer i) throws IOException, InterruptedException {
+        List<Daily> dailyList = getAllDailyData(provinceName);
         Daily daily;
-        if (0 < i && i < 6) {
-            daily = dailyList.get(i - 1);
-            return daily;
-        } else {
-            return null;
+        switch (i) {
+            case 1 -> daily = dailyList.get(0);
+            case 2 -> daily = dailyList.get(1);
+            case 3 -> daily = dailyList.get(2);
+            case 4 -> daily = dailyList.get(3);
+            case 5 -> daily = dailyList.get(4);
+            default -> throw new IllegalStateException("Unexpected value: " + i);
         }
+        return daily;
     }
 }

@@ -31,6 +31,7 @@ public class Hourly {
     @JsonProperty("tarih")
     private LocalDateTime date;
 
+    // This method is used to regularize the data that comes from the MGM Service.
     public void regularize() {
         this.date = this.date.plusHours(3);
         switch (this.event) {

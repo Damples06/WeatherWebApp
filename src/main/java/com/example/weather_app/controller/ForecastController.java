@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class ForecastController {
     private final ForecastService forecastService;
 
-    @GetMapping("/{il}/forecast")
-    public ResponseEntity<Forecast> getForecastData(@PathVariable String il) throws IOException, InterruptedException {
-        Forecast forecast = forecastService.getForecastData(il);
+    // This method is used to get the forecast data of the area.
+    @GetMapping("/{provinceName}/forecast")
+    public ResponseEntity<Forecast> getForecastData(@PathVariable String provinceName) throws IOException, InterruptedException {
+        Forecast forecast = forecastService.getForecastData(provinceName);
         return new ResponseEntity<>(forecast, HttpStatus.OK);
     }
 }

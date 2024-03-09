@@ -53,6 +53,7 @@ public class Forecast {
     @JsonProperty("denizVeriZamani")
     private LocalDateTime seaDataTime;
 
+    // This method is used to regularize the data that comes from the MGM Service.
     public void regularize(){
         if (this.seaTemperature == -9999)
             this.seaTemperature = null;

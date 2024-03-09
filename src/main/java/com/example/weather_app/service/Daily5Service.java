@@ -17,14 +17,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class Daily5Service {
+
     @Autowired
     private final AreaService areaService;
     private final ObjectMapper objectMapper;
 
-    public Daily5 daily5Data(String il) throws IOException, InterruptedException {
+    public Daily5 daily5Data(String provinceName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://servis.mgm.gov.tr/web/tahminler/gunluk?istno=" + areaService.getAreaDetails(il).getDailyId()))
+                .uri(URI.create("https://servis.mgm.gov.tr/web/tahminler/gunluk?istno=" + areaService.getAreaDetails(provinceName).getDailyId()))
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();

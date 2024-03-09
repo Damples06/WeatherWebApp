@@ -22,22 +22,21 @@ public class AreaService {
     private final AreaRepository areaRepository;
     private final ObjectMapper objectMapper;
 
-
     // This method is used to get the details of the area from the database if it exists, otherwise it gets the details from the MGM Service.
     @SneakyThrows
-    public Area getAreaDetails(String il) {
-        if (areaRepository.findByProvinceName(il) != null) {
-            return areaRepository.findByProvinceName(il);
+    public Area getAreaDetails(String provinceName) {
+        if (areaRepository.findByProvinceName(provinceName) != null) {
+            return areaRepository.findByProvinceName(provinceName);
         } else {
-            return getAreaDetailsFromAPI(il);
+            return getAreaDetailsFromAPI(provinceName);
         }
     }
 
     // This method is used to get the details of the area from the MGM Service.
-    private Area getAreaDetailsFromAPI(String il) throws IOException, InterruptedException {
+    private Area getAreaDetailsFromAPI(String provinceName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://servis.mgm.gov.tr/web/merkezler?il=" + il))
+                .uri(URI.create("https://servis.mgm.gov.tr/web/merkezler?il=" + provinceName))
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();
@@ -48,5 +47,4 @@ public class AreaService {
         areaRepository.save(areaToSave);
         return areaToSave;
     }
-
 }

@@ -20,15 +20,16 @@ public class DailyController {
 
     private final DailyService dailyService;
 
-    @GetMapping("/{il}/daily/all")
-    public ResponseEntity<List<Daily>> getAllDaily(@PathVariable String il) throws IOException, InterruptedException {
-        List<Daily> dailyWeatherData = dailyService.getAllDailyData(il);
+    // This method is used to get the 5-day weather data of the area.
+    @GetMapping("/{provinceName}/daily/all")
+    public ResponseEntity<List<Daily>> getAllDaily(@PathVariable String provinceName) throws IOException, InterruptedException {
+        List<Daily> dailyWeatherData = dailyService.getAllDailyData(provinceName);
         return new ResponseEntity<>(dailyWeatherData, HttpStatus.OK);
     }
-
-    @GetMapping("/{il}/daily/{i}")
-    public ResponseEntity<Daily> getDailyByIndex(@PathVariable String il, @PathVariable Integer i) throws IOException, InterruptedException {
-        Daily daily = dailyService.getSingleDailyData(il, i);
+    // This method is used to get the daily weather data of the area by index. Index starts from 1 and ends at 5.
+    @GetMapping("/{provinceName}/daily/{i}")
+    public ResponseEntity<Daily> getDailyByIndex(@PathVariable String provinceName, @PathVariable Integer i) throws IOException, InterruptedException {
+        Daily daily = dailyService.getSingleDailyData(provinceName, i);
         return new ResponseEntity<>(daily, HttpStatus.OK);
     }
 }

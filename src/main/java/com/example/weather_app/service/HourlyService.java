@@ -21,11 +21,11 @@ public class HourlyService {
     private final AreaService areaService;
     private final ObjectMapper objectMapper;
 
-    public List<Hourly> getHourlyWeatherData(String cityName) throws IOException, InterruptedException {
+    public List<Hourly> getHourlyWeatherData(String provinceName) throws IOException, InterruptedException {
 
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://servis.mgm.gov.tr/web/tahminler/saatlik?istno=" + areaService.getAreaDetails(cityName).getHourlyId()))
+                .uri(URI.create("https://servis.mgm.gov.tr/web/tahminler/saatlik?istno=" + areaService.getAreaDetails(provinceName).getHourlyId()))
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();
@@ -35,13 +35,28 @@ public class HourlyService {
         List<Hourly> hourlyList = objectMapper.readValue(hourlyNode.toString(), new TypeReference<>() {});
         for (Hourly hourly : hourlyList) {
             hourly.regularize();
-            hourly.setHourlyId(areaService.getAreaDetails(cityName).getHourlyId());
+            hourly.setHourlyId(areaService.getAreaDetails(provinceName).getHourlyId());
         }
         return hourlyList;
     }
 
-    public Hourly getDesiredHourlyData(String cityName, int i) throws IOException, InterruptedException {
-        List<Hourly> hourlyList = getHourlyWeatherData(cityName);
-        return hourlyList.get(i-1);
+    public Hourly getDesiredHourlyData(String provinceName, int i) throws IOException, InterruptedException {
+        List<Hourly> hourlyList = getHourlyWeatherData(provinceName);
+        Hourly hourly;
+        switch (i) {
+            case 1 -> hourly = hourlyList.get(0);
+            case 2 -> hourly = hourlyList.get(1);
+            case 3 -> hourly = hourlyList.get(2);
+            case 4 -> hourly = hourlyList.get(3);
+            case 5 -> hourly = hourlyList.get(4);
+            case 6 -> hourly = hourlyList.get(5);
+            case 7 -> hourly = hourlyList.get(6);
+            case 8 -> hourly = hourlyList.get(7);
+            case 9 -> hourly = hourlyList.get(8);
+            case 10 -> hourly = hourlyList.get(9);
+            case 11 -> hourly = hourlyList.get(10);
+            default -> throw new IllegalStateException("Unexpected value: " + i);
+        }
+        return hourly;
     }
 }

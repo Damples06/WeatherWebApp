@@ -17,13 +17,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ForecastService {
+
     @Autowired
     private final AreaService areaService;
     private final ObjectMapper objectMapper;
-    public Forecast getForecastData(String il) throws IOException, InterruptedException {
+
+    public Forecast getForecastData(String provinceName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://servis.mgm.gov.tr/web/sondurumlar?istno=" + areaService.getAreaDetails(il).getForecastId()))
+                .uri(URI.create("https://servis.mgm.gov.tr/web/sondurumlar?istno=" + areaService.getAreaDetails(provinceName).getForecastId()))
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();

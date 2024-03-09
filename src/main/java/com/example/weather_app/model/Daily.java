@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @RequiredArgsConstructor
@@ -27,6 +26,7 @@ public class Daily {
     @JsonProperty("tarih")
     private LocalDate date;
 
+    // This method is used to regularize the data that comes from the MGM Service.
     public void regularize() {
         switch (this.event) {
             case "A":

@@ -14,10 +14,10 @@ public class AreaController {
 
     private final AreaService areaService;
 
-    // This method is used to get the details of the area from the MGM Service.
-    @GetMapping("/{il}")
-    public ResponseEntity<Area> getAreaDetails(@PathVariable String il) {
-        Area areaDetails = areaService.getAreaDetails(il.toLowerCase());
+    // This method is used to get the details of the area.
+    @GetMapping("/{provinceName}")
+    public ResponseEntity<Area> getAreaDetails(@PathVariable String provinceName) {
+        Area areaDetails = areaService.getAreaDetails(provinceName.toLowerCase());
         return new ResponseEntity<>(areaDetails, HttpStatus.OK);
     }
 }
