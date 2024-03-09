@@ -1,54 +1,94 @@
 package com.example.weather_app.service;
 
 import com.example.weather_app.model.Daily;
-import com.example.weather_app.repository.AreaRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.weather_app.model.Daily5;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class DailyService {
 
-    @Autowired
-    private final AreaRepository areaRepository;
-    private final AreaService areaService;
-    private final ObjectMapper objectMapper;
+    private final Daily5Service daily5Service;
 
-    @Cacheable(value = "dailyCache", key = "#il")
-    public Daily getDailyWeatherData(String il) throws IOException, InterruptedException {
-        if (areaRepository.findByIlIgnoreCase(il) == null) {
-            areaService.getAreaDetails(il);
-        }
-        HttpClient client = HttpClient.newBuilder().build();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://servis.mgm.gov.tr/web/sondurumlar?merkezid=" + getMerkezIdByIl(il)))
-                .header("content-type", "application/octet-stream")
-                .header("Origin", "https://www.mgm.gov.tr")
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        List<Daily> dailies = objectMapper.readValue(response.body(), new TypeReference<>() {});
+    public List<Daily> getAllDailyData(String il) throws IOException, InterruptedException {
 
-        if (!dailies.isEmpty()) {
-            Daily daily = dailies.get(0);
-            daily.setIl(il); // Set the il field based on the input parameter
-            return daily;
-        } else {
-            throw new RuntimeException("No daily weather data found for the given il: " + il);
+        // Get Daily5 data from Daily5Service
+        Daily5 data = daily5Service.daily5Data(il);
+
+
+        // Create Daily objects from Daily5 data
+        Daily daily1 = new Daily();
+        Daily daily2 = new Daily();
+        Daily daily3 = new Daily();
+        Daily daily4 = new Daily();
+        Daily daily5 = new Daily();
+
+        daily1.setMinTemperature(data.getMinTemperatureDay1());
+        daily1.setMaxTemperature(data.getMaxTemperatureDay1());
+        daily1.setMinHumidity(data.getMinHumidityDay1());
+        daily1.setMaxHumidity(data.getMaxHumidityDay1());
+        daily1.setWindSpeed(data.getWindSpeedDay1());
+        daily1.setWindDirection(data.getWindDirectionDay1());
+        daily1.setDate(data.getDateDay1().toLocalDate());
+        daily1.setEvent(data.getEventDay1());
+
+        daily2.setMinTemperature(data.getMinTemperatureDay2());
+        daily2.setMaxTemperature(data.getMaxTemperatureDay2());
+        daily2.setMinHumidity(data.getMinHumidityDay2());
+        daily2.setMaxHumidity(data.getMaxHumidityDay2());
+        daily2.setWindSpeed(data.getWindSpeedDay2());
+        daily2.setWindDirection(data.getWindDirectionDay2());
+        daily2.setDate(data.getDateDay2().toLocalDate());
+        daily2.setEvent(data.getEventDay2());
+
+        daily3.setMinTemperature(data.getMinTemperatureDay3());
+        daily3.setMaxTemperature(data.getMaxTemperatureDay3());
+        daily3.setMinHumidity(data.getMinHumidityDay3());
+        daily3.setMaxHumidity(data.getMaxHumidityDay3());
+        daily3.setWindSpeed(data.getWindSpeedDay3());
+        daily3.setWindDirection(data.getWindDirectionDay3());
+        daily3.setDate(data.getDateDay3().toLocalDate());
+        daily3.setEvent(data.getEventDay3());
+
+        daily4.setMinTemperature(data.getMinTemperatureDay4());
+        daily4.setMaxTemperature(data.getMaxTemperatureDay4());
+        daily4.setMinHumidity(data.getMinHumidityDay4());
+        daily4.setMaxHumidity(data.getMaxHumidityDay4());
+        daily4.setWindSpeed(data.getWindSpeedDay4());
+        daily4.setWindDirection(data.getWindDirectionDay4());
+        daily4.setDate(data.getDateDay4().toLocalDate());
+        daily4.setEvent(data.getEventDay4());
+
+        daily5.setMinTemperature(data.getMinTemperatureDay5());
+        daily5.setMaxTemperature(data.getMaxTemperatureDay5());
+        daily5.setMinHumidity(data.getMinHumidityDay5());
+        daily5.setMaxHumidity(data.getMaxHumidityDay5());
+        daily5.setWindSpeed(data.getWindSpeedDay5());
+        daily5.setWindDirection(data.getWindDirectionDay5());
+        daily5.setDate(data.getDateDay5().toLocalDate());
+        daily5.setEvent(data.getEventDay5());
+
+        List<Daily> dailyList = List.of(daily1, daily2, daily3, daily4, daily5);
+
+        for (Daily daily : dailyList) {
+            daily.regularize();
         }
+
+        return dailyList;
     }
 
-    private int getMerkezIdByIl(String il) {
-        return areaRepository.findByIlIgnoreCase(il).getMerkezId();
+    public Daily getSingleDailyData(String il, Integer i) throws IOException, InterruptedException {
+        List<Daily> dailyList = getAllDailyData(il);
+        Daily daily;
+        if (0 < i && i < 6) {
+            daily = dailyList.get(i - 1);
+            return daily;
+        } else {
+            return null;
+        }
     }
 }

@@ -22,19 +22,18 @@ public class AreaService {
     private final AreaRepository areaRepository;
     private final ObjectMapper objectMapper;
 
+
+    // This method is used to get the details of the area from the database if it exists, otherwise it gets the details from the MGM Service.
     @SneakyThrows
     public Area getAreaDetails(String il) {
-        if (areaRepository.findByIlIgnoreCase(il) != null) {
-            System.out.println("From DB");
-            return areaRepository.findByIlIgnoreCase(il);
-        } else if ("favicon.ico".equals(il)) {
-            return null;
+        if (areaRepository.findByProvinceName(il) != null) {
+            return areaRepository.findByProvinceName(il);
         } else {
-            System.out.println("From API");
             return getAreaDetailsFromAPI(il);
         }
     }
 
+    // This method is used to get the details of the area from the MGM Service.
     private Area getAreaDetailsFromAPI(String il) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
@@ -42,12 +41,12 @@ public class AreaService {
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();
-
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         List<Area> areas = objectMapper.readValue(response.body(), new TypeReference<>() {});
         Area areaToSave = areas.get(0);
-        areaToSave.convertToLowerCase();
+        areaToSave.regularize();
         areaRepository.save(areaToSave);
         return areaToSave;
     }
+
 }

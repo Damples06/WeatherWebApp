@@ -8,14 +8,7 @@ spring:
       driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-            ddl-auto: update
+            ddl-auto: create-drop
     open-in-view: false
-  mustache:
-    check-template-location: false
   cache:
     type: simple
-
-logging:
-  level:
-    org:
-      atmosphere: warn

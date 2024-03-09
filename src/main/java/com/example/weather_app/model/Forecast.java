@@ -1,33 +1,64 @@
 package com.example.weather_app.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @RequiredArgsConstructor
-public class Daily {
-    @JsonProperty("enDusukSicaklik")
-    private Integer minTemperature;
-    @JsonProperty("enYuksekSicaklik")
-    private Integer maxTemperature;
-    @JsonProperty("enDusukNem")
-    private Integer minHumidity;
-    @JsonProperty("enYuksekNem")
-    private Integer maxHumidity;
+public class Forecast {
+    @Id
+    @JsonProperty("istNo")
+    private Integer forecastId;
+
+    @JsonProperty("sicaklik")
+    private Double temperature;
+    @JsonProperty("nem")
+    private Integer humidity;
     @JsonProperty("ruzgarHiz")
-    private Integer windSpeed;
+    private Double windSpeed;
     @JsonProperty("ruzgarYon")
     private Integer windDirection;
-    @JsonProperty("hadise")
+    @JsonProperty("hadiseKodu")
     private String event;
-    @JsonProperty("tarih")
-    private LocalDate date;
+    @JsonProperty("gorus")
+    private Integer visibility;
+    @JsonProperty("kapalilik")
+    private Integer cloudiness;
+    @JsonProperty("denizSicaklik")
+    private Integer seaTemperature;
+    @JsonProperty("aktuelBasinc")
+    private Integer actualPressure;
+    @JsonProperty("denizeIndirgenmisBasinc")
+    private Double pressureReducedToSeaLevel;
+    @JsonProperty("karYukseklik")
+    private Integer snowHeight;
+    @JsonProperty("yagis00Now")
+    private Double rainNow;
+    @JsonProperty("yagis10Dk")
+    private Double rain10Min;
+    @JsonProperty("yagis1Saat")
+    private Double rain1Hour;
+    @JsonProperty("yagis6Saat")
+    private Double rain6Hour;
+    @JsonProperty("yagis12Saat")
+    private Double rain12Hour;
+    @JsonProperty("yagis24Saat")
+    private Double rain24Hour;
+    @JsonProperty("veriZamani")
+    private LocalDateTime dataTime;
+    @JsonProperty("denizVeriZamani")
+    private LocalDateTime seaDataTime;
 
-    public void regularize() {
+    public void regularize(){
+        if (this.seaTemperature == -9999)
+            this.seaTemperature = null;
+        if (this.snowHeight == -9999)
+            this.snowHeight = null;
+        this.windSpeed = (double) Math.round(this.windSpeed * 100) / 100;
         switch (this.event) {
             case "A":
                 this.event = "Açık";
@@ -116,5 +147,6 @@ public class Daily {
             default:
                 this.event = "Bilinmiyor";
         }
+
     }
 }

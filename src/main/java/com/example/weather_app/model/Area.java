@@ -6,7 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.util.Locale;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 @Data
@@ -14,47 +15,34 @@ import java.util.Locale;
 public class Area {
     @Id
     @JsonProperty("merkezId")
-    private int merkezId;
+    private int areaId;
 
     @JsonProperty("il")
-    private String il;
-
+    private String provinceName;
     @JsonProperty("ilce")
-    private String ilce;
-
+    private String districtName;
     @JsonProperty("aciklama")
-    private String aciklama;
-
-    @JsonProperty("boylam")
-    private double boylam;
-
-    @JsonProperty("enlem")
-    private double enlem;
-
-    @JsonProperty("gunlukTahminIstNo")
-    private int gunlukTahminIstNo;
-
-    @JsonProperty("ilPlaka")
-    private int ilPlaka;
-
-    @JsonProperty("saatlikTahminIstNo")
-    private int saatlikTahminIstNo;
-
-    @JsonProperty("sonDurumIstNo")
-    private int sondurumIstNo;
-
+    private String description;
     @JsonProperty("yukseklik")
-    private int yukseklik;
+    private int altitude;
+    @JsonProperty("boylam")
+    private double longitude;
+    @JsonProperty("enlem")
+    private double latitude;
+    @JsonProperty("ilPlaka")
+    private int plateCode;
+    @JsonProperty("gunlukTahminIstNo")
+    private int dailyId;
+    @JsonProperty("saatlikTahminIstNo")
+    private int hourlyId;
+    @JsonProperty("sondurumIstNo")
+    private int forecastId;
 
-    public void convertToLowerCase() {
-        if (il != null) {
-            this.il = this.il.toLowerCase(new Locale("tr", "TR"));
-        }
-        if (ilce != null) {
-            this.ilce = this.ilce.toLowerCase(new Locale("tr", "TR"));
-        }
-        if (aciklama != null) {
-            this.aciklama = this.aciklama.toLowerCase(new Locale("tr", "TR"));
-        }
+    // This method is used to regularize the data that comes from the MGM Service.
+    public void regularize() {
+        this.provinceName = this.provinceName.toLowerCase();
+        this.districtName = this.districtName.toLowerCase();
+        this.longitude = (double) Math.round(this.longitude * 10000) / 10000;
+        this.latitude = (double) Math.round(this.latitude * 10000) / 10000;
     }
 }
