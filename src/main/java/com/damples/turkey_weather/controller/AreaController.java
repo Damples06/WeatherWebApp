@@ -1,7 +1,7 @@
-package com.example.weather_app.controller;
+package com.damples.turkey_weather.controller;
 
-import com.example.weather_app.model.Area;
-import com.example.weather_app.service.AreaService;
+import com.damples.turkey_weather.model.Area;
+import com.damples.turkey_weather.service.AreaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

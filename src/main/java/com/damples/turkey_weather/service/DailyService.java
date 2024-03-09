@@ -1,7 +1,7 @@
-package com.example.weather_app.service;
+package com.damples.turkey_weather.service;
 
-import com.example.weather_app.model.Daily;
-import com.example.weather_app.model.Daily5;
+import com.damples.turkey_weather.model.Daily;
+import com.damples.turkey_weather.model.Daily5;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

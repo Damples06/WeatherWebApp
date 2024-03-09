@@ -1,33 +1,39 @@
-package com.example.weather_app.model;
+package com.damples.turkey_weather.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @RequiredArgsConstructor
-public class Daily {
-    @JsonProperty("enDusukSicaklik")
-    private Integer minTemperature;
-    @JsonProperty("enYuksekSicaklik")
-    private Integer maxTemperature;
-    @JsonProperty("enDusukNem")
-    private Integer minHumidity;
-    @JsonProperty("enYuksekNem")
-    private Integer maxHumidity;
-    @JsonProperty("ruzgarHiz")
+public class Hourly {
+    @Id
+    @JsonProperty("istNo")
+    private Integer hourlyId;
+
+    @JsonProperty("sicaklik")
+    private Integer temperature;
+    @JsonProperty("hissedilenSicaklik")
+    private Integer feelsLike;
+    @JsonProperty("nem")
+    private Integer humidity;
+    @JsonProperty("ruzgarHizi")
     private Integer windSpeed;
-    @JsonProperty("ruzgarYon")
+    @JsonProperty("maksimumRuzgarHizi")
+    private Integer maxWindSpeed;
+    @JsonProperty("ruzgarYonu")
     private Integer windDirection;
     @JsonProperty("hadise")
     private String event;
     @JsonProperty("tarih")
-    private LocalDate date;
+    private LocalDateTime date;
 
     // This method is used to regularize the data that comes from the MGM Service.
     public void regularize() {
+        this.date = this.date.plusHours(3);
         switch (this.event) {
             case "A":
                 this.event = "Açık";

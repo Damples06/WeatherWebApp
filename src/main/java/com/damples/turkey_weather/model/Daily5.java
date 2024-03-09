@@ -1,4 +1,4 @@
-package com.example.weather_app.model;
+package com.damples.turkey_weather.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Id;

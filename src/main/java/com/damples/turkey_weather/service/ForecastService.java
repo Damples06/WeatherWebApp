@@ -1,6 +1,6 @@
-package com.example.weather_app.service;
+package com.damples.turkey_weather.service;
 
-import com.example.weather_app.model.Daily5;
+import com.damples.turkey_weather.model.Forecast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,23 +16,23 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class Daily5Service {
+public class ForecastService {
 
     @Autowired
     private final AreaService areaService;
     private final ObjectMapper objectMapper;
 
-    public Daily5 daily5Data(String provinceName) throws IOException, InterruptedException {
+    public Forecast getForecastData(String provinceName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://servis.mgm.gov.tr/web/tahminler/gunluk?istno=" + areaService.getAreaDetails(provinceName).getDailyId()))
+                .uri(URI.create("https://servis.mgm.gov.tr/web/sondurumlar?istno=" + areaService.getAreaDetails(provinceName).getForecastId()))
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        List<Daily5> daily5List = objectMapper.readValue(response.body(), new TypeReference<>() {});
-        Daily5 daily5 = daily5List.get(0);
-        System.out.println(daily5.getDailyId());
-        return daily5;
+        List<Forecast> forecastList = objectMapper.readValue(response.body(), new TypeReference<>() {});
+        Forecast forecast = forecastList.get(0);
+        forecast.regularize();
+        return forecast;
     }
 }

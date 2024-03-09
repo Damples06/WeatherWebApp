@@ -1,6 +1,6 @@
-package com.example.weather_app.repository;
+package com.damples.turkey_weather.repository;
 
-import com.example.weather_app.model.Area;
+import com.damples.turkey_weather.model.Area;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

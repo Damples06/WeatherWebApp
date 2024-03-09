@@ -1,7 +1,7 @@
-package com.example.weather_app.service;
+package com.damples.turkey_weather.service;
 
-import com.example.weather_app.model.Area;
-import com.example.weather_app.repository.AreaRepository;
+import com.damples.turkey_weather.repository.AreaRepository;
+import com.damples.turkey_weather.model.Area;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

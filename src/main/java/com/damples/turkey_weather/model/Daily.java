@@ -1,65 +1,33 @@
-package com.example.weather_app.model;
+package com.damples.turkey_weather.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
-public class Forecast {
-    @Id
-    @JsonProperty("istNo")
-    private Integer forecastId;
-
-    @JsonProperty("sicaklik")
-    private Double temperature;
-    @JsonProperty("nem")
-    private Integer humidity;
+public class Daily {
+    @JsonProperty("enDusukSicaklik")
+    private Integer minTemperature;
+    @JsonProperty("enYuksekSicaklik")
+    private Integer maxTemperature;
+    @JsonProperty("enDusukNem")
+    private Integer minHumidity;
+    @JsonProperty("enYuksekNem")
+    private Integer maxHumidity;
     @JsonProperty("ruzgarHiz")
-    private Double windSpeed;
+    private Integer windSpeed;
     @JsonProperty("ruzgarYon")
     private Integer windDirection;
-    @JsonProperty("hadiseKodu")
+    @JsonProperty("hadise")
     private String event;
-    @JsonProperty("gorus")
-    private Integer visibility;
-    @JsonProperty("kapalilik")
-    private Integer cloudiness;
-    @JsonProperty("denizSicaklik")
-    private Integer seaTemperature;
-    @JsonProperty("aktuelBasinc")
-    private Integer actualPressure;
-    @JsonProperty("denizeIndirgenmisBasinc")
-    private Double pressureReducedToSeaLevel;
-    @JsonProperty("karYukseklik")
-    private Integer snowHeight;
-    @JsonProperty("yagis00Now")
-    private Double rainNow;
-    @JsonProperty("yagis10Dk")
-    private Double rain10Min;
-    @JsonProperty("yagis1Saat")
-    private Double rain1Hour;
-    @JsonProperty("yagis6Saat")
-    private Double rain6Hour;
-    @JsonProperty("yagis12Saat")
-    private Double rain12Hour;
-    @JsonProperty("yagis24Saat")
-    private Double rain24Hour;
-    @JsonProperty("veriZamani")
-    private LocalDateTime dataTime;
-    @JsonProperty("denizVeriZamani")
-    private LocalDateTime seaDataTime;
+    @JsonProperty("tarih")
+    private LocalDate date;
 
     // This method is used to regularize the data that comes from the MGM Service.
-    public void regularize(){
-        if (this.seaTemperature == -9999)
-            this.seaTemperature = null;
-        if (this.snowHeight == -9999)
-            this.snowHeight = null;
-        this.windSpeed = (double) Math.round(this.windSpeed * 100) / 100;
+    public void regularize() {
         switch (this.event) {
             case "A":
                 this.event = "Açık";
@@ -148,6 +116,5 @@ public class Forecast {
             default:
                 this.event = "Bilinmiyor";
         }
-
     }
 }

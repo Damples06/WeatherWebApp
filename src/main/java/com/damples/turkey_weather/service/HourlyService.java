@@ -1,6 +1,6 @@
-package com.example.weather_app.service;
+package com.damples.turkey_weather.service;
 
-import com.example.weather_app.model.Hourly;
+import com.damples.turkey_weather.model.Hourly;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

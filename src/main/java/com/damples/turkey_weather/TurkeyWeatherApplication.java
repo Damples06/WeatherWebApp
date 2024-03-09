@@ -1,13 +1,13 @@
-package com.example.weather_app;
+package com.damples.turkey_weather;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WeatherAppApplication {
+public class TurkeyWeatherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WeatherAppApplication.class, args);
+		SpringApplication.run(TurkeyWeatherApplication.class, args);
 	}
 
 }
