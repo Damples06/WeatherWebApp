@@ -1,9 +1,10 @@
 # Turkey Weather Hub
 
-Turkey Weather Hub is a Spring Boot application that provides weather information for cities. It leverages Spring Data JPA for data persistence and integrates with external weather APIs, including the MGM (Turkish State Meteorological Service), to fetch real-time weather data.
+Turkey Weather Hub is an innovative Spring Boot application designed to offer up-to-date weather information for cities in Turkey. It seamlessly combines the power of Spring Data JPA for efficient data storage with integration capabilities for the MGM (Turkish State Meteorological Service). This integration allows the application to fetch and deliver real-time weather data, providing users with accurate and timely information.
 
 ## Table of Contents
 
+- [Project Motivation](#project-motivation)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
@@ -11,12 +12,16 @@ Turkey Weather Hub is a Spring Boot application that provides weather informatio
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 
+## Project Motivation
+
+The motivation behind this project was to address the lack of documentation for the MGM (Turkish State Meteorological Service) API. Faced with the absence of clear guidelines, the project emerged as a solution by utilizing the available data through the service. The aim was to create a clean, readable version of the weather information, regulating and enhancing the data retrieved from the service for a better user experience.
+
 ## Features
 
-- **City Details:** Retrieve detailed information about a city, including its location, daily weather, and more.
-- **Real-time Data:** Harness the power of MGM (Turkish State Meteorological Service) as an external API to fetch up-to-date and accurate weather information.
-- **Data Persistence:** Store city information in a PostgreSQL database using Spring Data JPA.
-- **RESTful Endpoints:** Expose RESTful endpoints for easy integration with other applications.
+- **Area Details:** Obtain comprehensive information about a area, encompassing its geographical location, daily weather updates, and more.
+- **Real-time Data:** Utilize the MGM (Turkish State Meteorological Service) as an external API, ensuring the retrieval of current and precise weather information.
+- **Data Persistence:** Seamlessly store area-specific data in a PostgreSQL database leveraging the capabilities of Spring Data JPA.
+- **RESTful Endpoints:** Facilitate effortless integration with other applications by exposing RESTful endpoints.
 
 ## Technologies Used
 
@@ -48,32 +53,56 @@ Turkey Weather Hub is a Spring Boot application that provides weather informatio
 
 ## Usage
 
-**City Details**
+**Area Details**
    
-   To retrieve details for a specific city, use the following endpoint:
+   To retrieve details for a specific area, use the following endpoint:
    
    ```
       GET /{city-name}
    ```
+
+**Hourly Weather Data**
+
    
-   Example:
+   To get the hourly weather data for a area, use the following endpoints:
+
+   - Get All Hourly Data
    
-   ```bash
-      curl http://localhost:8686/Istanbul
    ```
+      GET /{city-name}/hourly/all
+   ```
+   
+   - Get Single Hourly Data
+
+   ```
+      GET /{city-name}/hourly/{i}
+   ```
+
 **Daily Weather Data**
 
    
-   To get the daily weather data for a city, use the following endpoint:
+   To get the daily weather data for a area, use the following endpoints:
+
+   - Get All Daily Data
    
    ```
-      GET /daily/{city-name}
+      GET /{city-name}/daily/all
    ```
    
-   Example:
+   - Get Single Daily Data
+
+   ```
+      GET /{city-name}/daily/{i}
+   ```
+
+**Forecast Data**
+
    
-   ```bash
-      curl http://localhost:8686/daily/Istanbul
+   To get the forecast data for a area, use the following endpoint:
+
+   
+   ```
+      GET /{city-name}/forecast
    ```
 
  ## Configuration
@@ -93,8 +122,6 @@ spring:
     hibernate:
             ddl-auto: update
     open-in-view: false
-  cache:
-    type: simple
    ```
 
 ## Contributing
