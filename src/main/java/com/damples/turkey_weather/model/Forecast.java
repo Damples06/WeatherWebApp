@@ -52,5 +52,4 @@ public class Forecast {
     private LocalDateTime dataTime;
     @JsonProperty("denizVeriZamani")
     private LocalDateTime seaDataTime;
-
 }

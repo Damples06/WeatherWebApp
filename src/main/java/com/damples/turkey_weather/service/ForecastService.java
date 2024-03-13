@@ -57,6 +57,8 @@ public class ForecastService {
             forecast.setHumidity(null);
         if (forecast.getWindSpeed() == -9999)
             forecast.setWindSpeed(null);
+        else
+            forecast.setWindSpeed((double) Math.round(forecast.getWindSpeed() * 100) / 100);
         if (forecast.getWindDirection() == -9999)
             forecast.setWindDirection(null);
         if (forecast.getVisibility() == -9999)
@@ -71,97 +73,36 @@ public class ForecastService {
             forecast.setSeaTemperature(null);
         if (forecast.getSnowHeight() == -9999)
             forecast.setSnowHeight(null);
-        forecast.setWindSpeed((double) Math.round(forecast.getWindSpeed() * 100) / 100);
         switch (forecast.getEvent()) {
-            case "A":
-                forecast.setEvent("Açık");
-                break;
-            case "AB":
-                forecast.setEvent("Az Bulutlu");
-                break;
-            case "PB":
-                forecast.setEvent("Parçalı Bulutlu");
-                break;
-            case "CB":
-                forecast.setEvent("Çok Bulutlu");
-                break;
-            case "HY":
-                forecast.setEvent("Hafif Yağmurlu");
-                break;
-            case "Y":
-                forecast.setEvent("Yağmurlu");
-                break;
-            case "KY":
-                forecast.setEvent("Kuvvetli Yağmurlu");
-                break;
-            case "KKY":
-                forecast.setEvent("Karla Karışık Yağmurlu");
-                break;
-            case "HKY":
-                forecast.setEvent("Hafif Kar Yağışlı");
-                break;
-            case "K":
-                forecast.setEvent("Kar Yağışlı");
-                break;
-            case "YKY":
-                forecast.setEvent("Yoğun Kar Yağışlı");
-                break;
-            case "HSY":
-                forecast.setEvent("Hafif Sağanak Yağışlı");
-                break;
-            case "SY":
-                forecast.setEvent("Sağanak Yağışlı");
-                break;
-            case "KSY":
-                forecast.setEvent("Kuvvetli Sağanak Yağışlı");
-                break;
-            case "MSY":
-                forecast.setEvent("Mevzi Sağanak Yağışlı");
-                break;
-            case "DY":
-                forecast.setEvent("Dolu");
-                break;
-            case "GSY":
-                forecast.setEvent("Gökgürültülü Sağanak Yağışlı");
-                break;
-            case "KGY":
-                forecast.setEvent("Kuvvetli Gökgürültülü Sağanak Yağışlı");
-                break;
-            case "SIS":
-                forecast.setEvent("Sisli");
-                break;
-            case "PUS":
-                forecast.setEvent("Puslu");
-                break;
-            case "DMN":
-                forecast.setEvent("Dumanlı");
-                break;
-            case "KF":
-                forecast.setEvent("Kum Fırtınası");
-                break;
-            case "R":
-                forecast.setEvent("Rüzgarlı");
-                break;
-            case "GKR":
-                // Güneyli olması lazım. Kontrol et.
-                forecast.setEvent("Kuzeyli Kuvvetli Rüzgar");
-                break;
-            case "KKR":
-                forecast.setEvent("Kuzeyli Kuvvetli Rüzgar");
-                break;
-            case "SCK":
-                forecast.setEvent("Sıcak");
-                break;
-            case "SGK":
-                forecast.setEvent("Soğuk");
-                break;
-            case "HHY":
-                forecast.setEvent("Yağışlı");
-                break;
-            default:
-                forecast.setEvent("Bilinmeyen");
-                break;
+            case "A" -> forecast.setEvent("Açık");
+            case "AB" -> forecast.setEvent("Az Bulutlu");
+            case "PB" -> forecast.setEvent("Parçalı Bulutlu");
+            case "CB" -> forecast.setEvent("Çok Bulutlu");
+            case "HY" -> forecast.setEvent("Hafif Yağmurlu");
+            case "Y" -> forecast.setEvent("Yağmurlu");
+            case "KY" -> forecast.setEvent("Kuvvetli Yağmurlu");
+            case "KKY" -> forecast.setEvent("Karla Karışık Yağmurlu");
+            case "HKY" -> forecast.setEvent("Hafif Kar Yağışlı");
+            case "K" -> forecast.setEvent("Kar Yağışlı");
+            case "YKY" -> forecast.setEvent("Yoğun Kar Yağışlı");
+            case "HSY" -> forecast.setEvent("Hafif Sağanak Yağışlı");
+            case "SY" -> forecast.setEvent("Sağanak Yağışlı");
+            case "KSY" -> forecast.setEvent("Kuvvetli Sağanak Yağışlı");
+            case "MSY" -> forecast.setEvent("Mevzi Sağanak Yağışlı");
+            case "DY" -> forecast.setEvent("Dolu");
+            case "GSY" -> forecast.setEvent("Gökgürültülü Sağanak Yağışlı");
+            case "KGY" -> forecast.setEvent("Kuvvetli Gökgürültülü Sağanak Yağışlı");
+            case "SIS" -> forecast.setEvent("Sisli");
+            case "PUS" -> forecast.setEvent("Puslu");
+            case "DMN" -> forecast.setEvent("Dumanlı");
+            case "KF" -> forecast.setEvent("Kum veya Toz Taşınımı");
+            case "R" -> forecast.setEvent("Rüzgarlı");
+            case "GKR" -> forecast.setEvent("Güneyli Kuvvetli Rüzgar");
+            case "KKR" -> forecast.setEvent("Kuzeyli Kuvvetli Rüzgar");
+            case "SCK" -> forecast.setEvent("Sıcak");
+            case "SGK" -> forecast.setEvent("Soğuk");
+            case "HHY" -> forecast.setEvent("Yağışlı");
+            default -> forecast.setEvent("Bilinmeyen Durum");
         }
-
     }
 }

@@ -34,12 +34,4 @@ public class Area {
     private int hourlyId;
     @JsonProperty("sondurumIstNo")
     private int forecastId;
-
-    // This method is used to regularize the data that comes from the MGM Service.
-    public void regularize() {
-        this.provinceName = this.provinceName.toLowerCase();
-        this.districtName = this.districtName.toLowerCase();
-        this.longitude = (double) Math.round(this.longitude * 10000) / 10000;
-        this.latitude = (double) Math.round(this.latitude * 10000) / 10000;
-    }
 }

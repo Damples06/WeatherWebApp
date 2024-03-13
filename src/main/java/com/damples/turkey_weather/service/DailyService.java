@@ -111,9 +111,43 @@ public class DailyService {
         List<Daily> dailyList = List.of(daily1, daily2, daily3, daily4, daily5);
 
         for (Daily daily : dailyList) {
-            daily.regularize();
+            regularize(daily);
         }
 
         return dailyList;
+    }
+
+    private void regularize(Daily daily) {
+        switch (daily.getEvent()) {
+            case "A" -> daily.setEvent("Açık");
+            case "AB" -> daily.setEvent("Az Bulutlu");
+            case "PB" -> daily.setEvent("Parçalı Bulutlu");
+            case "CB" -> daily.setEvent("Çok Bulutlu");
+            case "HY" -> daily.setEvent("Hafif Yağmurlu");
+            case "Y" -> daily.setEvent("Yağmurlu");
+            case "KY" -> daily.setEvent("Kuvvetli Yağmurlu");
+            case "KKY"-> daily.setEvent("Karla Karışık Yağmurlu");
+            case "HKY"-> daily.setEvent("Hafif Kar Yağışlı");
+            case "K" -> daily.setEvent("Kar Yağışlı");
+            case "YKY" -> daily.setEvent("Yoğun Kar Yağışlı");
+            case "HSY" -> daily.setEvent("Hafif Sağanak Yağışlı");
+            case "SY" -> daily.setEvent("Sağanak Yağışlı");
+            case "KSY" -> daily.setEvent("Kuvvetli Sağanak Yağışlı");
+            case "MSY" -> daily.setEvent("Mevzi Sağanak Yağışlı");
+            case "DY" -> daily.setEvent("Dolu");
+            case "GSY" -> daily.setEvent("Gökgürültülü Sağanak Yağışlı");
+            case "KGY" -> daily.setEvent("Kuvvetli Gökgürültülü Sağanak Yağışlı");
+            case "SIS" -> daily.setEvent("Sisli");
+            case "PUS" -> daily.setEvent("Puslu");
+            case "DMN" -> daily.setEvent("Dumanlı");
+            case "KF" -> daily.setEvent("Kum veya Toz Taşınımı");
+            case "R" -> daily.setEvent("Rüzgarlı");
+            case "GKR" -> daily.setEvent("Güneyli Kuvvetli Rüzgar");
+            case "KKR" -> daily.setEvent("Kuzeyli Kuvvetli Rüzgar");
+            case "SCK" -> daily.setEvent("Sıcak");
+            case "SGK" -> daily.setEvent("Soğuk");
+            case "HHY" -> daily.setEvent("Yağışlı");
+            default -> daily.setEvent("Bilinmeyen Durum");
+        }
     }
 }
