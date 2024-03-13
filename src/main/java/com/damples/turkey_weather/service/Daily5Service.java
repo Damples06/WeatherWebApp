@@ -33,4 +33,16 @@ public class Daily5Service {
         List<Daily5> daily5List = objectMapper.readValue(response.body(), new TypeReference<>() {});
         return daily5List.get(0);
     }
+
+    public Daily5 daily5Data(String provinceName, String districtName) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://servis.mgm.gov.tr/web/tahminler/gunluk?istno=" + areaService.getAreaDetails(provinceName, districtName).getDailyId()))
+                .header("content-type", "application/octet-stream")
+                .header("Origin", "https://www.mgm.gov.tr")
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        List<Daily5> daily5List = objectMapper.readValue(response.body(), new TypeReference<>() {});
+        return daily5List.get(0);
+    }
 }

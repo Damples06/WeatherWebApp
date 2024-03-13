@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AreaRepository extends JpaRepository<Area, Integer> {
     Area findByProvinceName(String provinceName);
+
+    Area findByProvinceNameAndDistrictName(String provinceName, String districtName);
 }

@@ -32,6 +32,25 @@ public class AreaService {
         }
     }
 
+    @SneakyThrows
+    public Area getAreaDetails(String provinceName, String districtName) {
+        if (areaRepository.findByProvinceNameAndDistrictName(provinceName, districtName) != null) {
+            return areaRepository.findByProvinceNameAndDistrictName(provinceName, districtName);
+        } else {
+            return getAreaDetailsFromAPI(provinceName, districtName);
+        }
+    }
+
+    private Area getAreaDetailsFromAPI(String provinceName, String districtName) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://servis.mgm.gov.tr/web/merkezler?il=" + provinceName + "&ilce=" + districtName))
+                .header("content-type", "application/octet-stream")
+                .header("Origin", "https://www.mgm.gov.tr")
+                .build();
+        return getArea(client, request);
+    }
+
     // This method is used to get the details of the area from the MGM Service.
     private Area getAreaDetailsFromAPI(String provinceName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
@@ -40,6 +59,10 @@ public class AreaService {
                 .header("content-type", "application/octet-stream")
                 .header("Origin", "https://www.mgm.gov.tr")
                 .build();
+        return getArea(client, request);
+    }
+
+    private Area getArea(HttpClient client, HttpRequest request) throws IOException, InterruptedException {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         List<Area> areas = objectMapper.readValue(response.body(), new TypeReference<>() {});
         Area areaToSave = areas.get(0);

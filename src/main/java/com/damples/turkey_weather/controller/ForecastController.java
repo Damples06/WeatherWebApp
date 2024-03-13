@@ -5,23 +5,25 @@ import com.damples.turkey_weather.model.Forecast;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/{provinceName}/forecast")
+@RequestMapping("/forecast")
 public class ForecastController {
     private final ForecastService forecastService;
 
     // This method is used to get the forecast data of the area.
     @GetMapping()
-    public ResponseEntity<Forecast> getForecastData(@PathVariable String provinceName) throws IOException, InterruptedException {
-        Forecast forecast = forecastService.getForecastData(provinceName);
+    public ResponseEntity<Forecast> getForecastData(@RequestParam String provinceName, @RequestParam(required = false) String districtName) throws IOException, InterruptedException {
+        Forecast forecast;
+        if (districtName != null) {
+            forecast = forecastService.getForecastData(provinceName, districtName);
+        } else {
+            forecast = forecastService.getForecastData(provinceName);
+        }
         return new ResponseEntity<>(forecast, HttpStatus.OK);
     }
 }

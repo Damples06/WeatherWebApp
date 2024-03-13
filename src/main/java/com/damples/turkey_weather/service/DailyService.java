@@ -20,6 +20,43 @@ public class DailyService {
         Daily5 data = daily5Service.daily5Data(provinceName);
 
         // Create Daily objects from Daily5 data
+        return setDailies(data);
+    }
+
+    public List<Daily> getAllDailyData(String provinceName, String districtName) throws IOException, InterruptedException {
+
+        // Get Daily5 data from Daily5Service
+        Daily5 data = daily5Service.daily5Data(provinceName, districtName);
+
+        // Create Daily objects from Daily5 data
+        return setDailies(data);
+    }
+
+    // Get a single Daily object from the list of Daily objects
+    public Daily getSingleDailyData(String provinceName, Integer i) throws IOException, InterruptedException {
+        List<Daily> dailyList = getAllDailyData(provinceName);
+        return setDaily(i, dailyList);
+    }
+
+    public Daily getSingleDailyData(String provinceName, String districtName, Integer i) throws IOException, InterruptedException {
+        List<Daily> dailyList = getAllDailyData(provinceName, districtName);
+        return setDaily(i, dailyList);
+    }
+
+    private Daily setDaily(Integer i, List<Daily> dailyList) {
+        Daily daily;
+        switch (i) {
+            case 1 -> daily = dailyList.get(0);
+            case 2 -> daily = dailyList.get(1);
+            case 3 -> daily = dailyList.get(2);
+            case 4 -> daily = dailyList.get(3);
+            case 5 -> daily = dailyList.get(4);
+            default -> throw new IllegalStateException("Unexpected value: " + i);
+        }
+        return daily;
+    }
+
+    private List<Daily> setDailies(Daily5 data) {
         Daily daily1 = new Daily();
         Daily daily2 = new Daily();
         Daily daily3 = new Daily();
@@ -78,20 +115,5 @@ public class DailyService {
         }
 
         return dailyList;
-    }
-
-    // Get a single Daily object from the list of Daily objects
-    public Daily getSingleDailyData(String provinceName, Integer i) throws IOException, InterruptedException {
-        List<Daily> dailyList = getAllDailyData(provinceName);
-        Daily daily;
-        switch (i) {
-            case 1 -> daily = dailyList.get(0);
-            case 2 -> daily = dailyList.get(1);
-            case 3 -> daily = dailyList.get(2);
-            case 4 -> daily = dailyList.get(3);
-            case 5 -> daily = dailyList.get(4);
-            default -> throw new IllegalStateException("Unexpected value: " + i);
-        }
-        return daily;
     }
 }
