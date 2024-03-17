@@ -16,13 +16,14 @@ public class AreaController {
 
     // This method is used to get the details of the area.
     @GetMapping()
-    public ResponseEntity<Area> getAreaDetails(@RequestParam String provinceName,
-                                               @RequestParam(required = false) String districtName) {
-        if (districtName != null) {
-            Area areaDetails = areaService.getAreaDetails(provinceName.toLowerCase(), districtName.toLowerCase());
+    public ResponseEntity<Area> getAreaDetails(@RequestParam String province,
+                                               @RequestParam(required = false) String district) {
+        Area areaDetails;
+        if (district != null) {
+            areaDetails = areaService.getAreaDetails(province.toLowerCase(), district.toLowerCase());
             return new ResponseEntity<>(areaDetails, HttpStatus.OK);
         } else {
-            Area areaDetails = areaService.getAreaDetails(provinceName.toLowerCase());
+            areaDetails = areaService.getAreaDetails(province.toLowerCase());
             return new ResponseEntity<>(areaDetails, HttpStatus.OK);
         }
     }

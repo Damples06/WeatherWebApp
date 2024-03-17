@@ -19,15 +19,16 @@ public class HourlyController {
 
     // This method is used to get the hourly weather data of the area.
     @GetMapping("/all")
-    public ResponseEntity<List<Hourly>> getAllHourlyData(@RequestParam(name = "provinceName", required = true) String provinceName) throws IOException, InterruptedException {
-        List<Hourly> hourlyList = hourlyService.getHourlyWeatherData(provinceName);
+    public ResponseEntity<List<Hourly>> getAllHourlyData(@RequestParam String province) throws IOException, InterruptedException {
+        List<Hourly> hourlyList = hourlyService.getHourlyWeatherData(province);
         return new ResponseEntity<>(hourlyList, HttpStatus.OK);
     }
 
     // This method is used to get the hourly weather data of the area by index. Index starts from 1 and ends at 11.
-//    @GetMapping("/{i}")
-//    public ResponseEntity<Hourly> getSingleHourlyData(@RequestParam(name = "provinceName", required = true) String provinceName, @PathVariable Integer i) throws IOException, InterruptedException {
-//        Hourly hourly= hourlyService.getDesiredHourlyData(provinceName, i);
-//        return new ResponseEntity<>(hourly, HttpStatus.OK);
-//    }
+    @GetMapping("/{i}")
+    public ResponseEntity<Hourly> getSingleHourlyData(@RequestParam String province,
+                                                      @PathVariable Integer i) {
+        Hourly hourly= hourlyService.getSingleHourlyData(province, i);
+        return new ResponseEntity<>(hourly, HttpStatus.OK);
+    }
 }

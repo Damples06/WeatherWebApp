@@ -25,8 +25,8 @@ public class AreaService {
     // This method is used to get the details of the area from the database if it exists, otherwise it gets the details from the MGM Service.
     @SneakyThrows
     public Area getAreaDetails(String provinceName) {
-        if (areaRepository.findByProvinceName(provinceName) != null) {
-            return areaRepository.findByProvinceName(provinceName);
+        if (areaRepository.findByProvinceNameAndPriority(provinceName, 1) != null) {
+            return areaRepository.findByProvinceNameAndPriority(provinceName, 1);
         } else {
             return getAreaDetailsFromAPI(provinceName);
         }

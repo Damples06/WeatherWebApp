@@ -13,17 +13,20 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RequestMapping("/forecast")
 public class ForecastController {
+
     private final ForecastService forecastService;
 
     // This method is used to get the forecast data of the area.
     @GetMapping()
-    public ResponseEntity<Forecast> getForecastData(@RequestParam String provinceName, @RequestParam(required = false) String districtName) throws IOException, InterruptedException {
+    public ResponseEntity<Forecast> getForecastData(@RequestParam String province,
+                                                    @RequestParam(required = false) String district) throws IOException, InterruptedException {
         Forecast forecast;
-        if (districtName != null) {
-            forecast = forecastService.getForecastData(provinceName, districtName);
+        if (district != null) {
+            forecast = forecastService.getForecastData(province, district);
+            return new ResponseEntity<>(forecast, HttpStatus.OK);
         } else {
-            forecast = forecastService.getForecastData(provinceName);
+            forecast = forecastService.getForecastData(province);
+            return new ResponseEntity<>(forecast, HttpStatus.OK);
         }
-        return new ResponseEntity<>(forecast, HttpStatus.OK);
     }
 }

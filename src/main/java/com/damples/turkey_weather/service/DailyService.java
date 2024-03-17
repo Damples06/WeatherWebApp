@@ -45,13 +45,10 @@ public class DailyService {
 
     private Daily setDaily(Integer i, List<Daily> dailyList) {
         Daily daily;
-        switch (i) {
-            case 1 -> daily = dailyList.get(0);
-            case 2 -> daily = dailyList.get(1);
-            case 3 -> daily = dailyList.get(2);
-            case 4 -> daily = dailyList.get(3);
-            case 5 -> daily = dailyList.get(4);
-            default -> throw new IllegalStateException("Unexpected value: " + i);
+        try {
+            daily = dailyList.get(i - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Index out of bounds. Please enter a valid index.");
         }
         return daily;
     }

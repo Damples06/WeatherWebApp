@@ -71,28 +71,20 @@ public class HourlyService {
             case "SGK" -> hourly.setEvent("Soğuk");
             case "HHY" -> hourly.setEvent("Yağışlı");
             default -> hourly.setEvent("Bilinmeyen Durum");
-
         }
     }
-//    public Hourly getDesiredHourlyData(String provinceName, int i) throws IOException, InterruptedException {
-//        List<Hourly> hourlyList = getHourlyWeatherData(provinceName);
-//        Hourly hourly;
-//        switch (i) {
-//            case 1 -> hourly = hourlyList.get(0);
-//            case 2 -> hourly = hourlyList.get(1);
-//            case 3 -> hourly = hourlyList.get(2);
-//            case 4 -> hourly = hourlyList.get(3);
-//            case 5 -> hourly = hourlyList.get(4);
-//            case 6 -> hourly = hourlyList.get(5);
-//            case 7 -> hourly = hourlyList.get(6);
-//            case 8 -> hourly = hourlyList.get(7);
-//            case 9 -> hourly = hourlyList.get(8);
-//            case 10 -> hourly = hourlyList.get(9);
-//            case 11 -> hourly = hourlyList.get(10);
-//            default -> throw new IllegalStateException("Unexpected value: " + i);
-//        }
-//        return hourly;
-//    }
+
+    public Hourly getSingleHourlyData(String provinceName, Integer i) {
+        Hourly hourly;
+        try {
+            List<Hourly> hourlyList = getHourlyWeatherData(provinceName);
+            hourly = hourlyList.get(i - 1);
+        } catch (IOException | InterruptedException e) {
+            hourly = new Hourly();
+            hourly.setEvent("Bilinmeyen Durum");
+        }
+        return hourly;
+    }
 }
 
 

@@ -17,26 +17,28 @@ public class DailyController {
 
     private final DailyService dailyService;
 
-    // This method is used to get the 5-day weather data of the area.
     @GetMapping("/all")
-    public ResponseEntity<List<Daily>> getAllDaily(@RequestParam String provinceName, @RequestParam(required = false) String districtName) throws IOException, InterruptedException {
-        if (districtName != null) {
-            List<Daily> dailyWeatherData = dailyService.getAllDailyData(provinceName, districtName);
+    public ResponseEntity<List<Daily>> getAllDaily(@RequestParam String province,
+                                                   @RequestParam(required = false) String district) throws IOException, InterruptedException {
+        List<Daily> dailyWeatherData;
+        if (district != null) {
+            dailyWeatherData = dailyService.getAllDailyData(province, district);
             return new ResponseEntity<>(dailyWeatherData, HttpStatus.OK);
         } else {
-            List<Daily> dailyWeatherData = dailyService.getAllDailyData(provinceName);
+            dailyWeatherData = dailyService.getAllDailyData(province);
             return new ResponseEntity<>(dailyWeatherData, HttpStatus.OK);
         }
     }
-    // This method is used to get the daily weather data of the area by index. Index starts from 1 and ends at 5.
     @GetMapping("/{i}")
-    public ResponseEntity<Daily> getDailyByIndex(@RequestParam String provinceName, @RequestParam(required = false) String districtName, @PathVariable Integer i) throws IOException, InterruptedException {
-        if (districtName != null) {
-            Daily daily = dailyService.getSingleDailyData(provinceName, districtName, i);
-            return new ResponseEntity<>(daily, HttpStatus.OK);
+    public ResponseEntity<Daily> getDailyByIndex(@RequestParam String province,
+                                                 @RequestParam(required = false) String district,
+                                                 @PathVariable Integer i) throws IOException, InterruptedException {
+        Daily daily;
+        if (district != null) {
+            daily = dailyService.getSingleDailyData(province, district, i);
         } else {
-            Daily daily = dailyService.getSingleDailyData(provinceName, i);
-            return new ResponseEntity<>(daily, HttpStatus.OK);
+            daily = dailyService.getSingleDailyData(province, i);
         }
+        return new ResponseEntity<>(daily, HttpStatus.OK);
     }
 }
