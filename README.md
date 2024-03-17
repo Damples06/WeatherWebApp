@@ -18,7 +18,7 @@ The motivation behind this project was to address the lack of documentation for 
 
 ## Features
 
-- **Area Details:** Obtain comprehensive information about a area, encompassing its geographical location, daily weather updates, and more.
+- **Area Details:** Obtain comprehensive information about an area, encompassing its geographical location, daily weather updates, and more.
 - **Real-time Data:** Utilize the MGM (Turkish State Meteorological Service) as an external API, ensuring the retrieval of current and precise weather information.
 - **Data Persistence:** Seamlessly store area-specific data in a PostgreSQL database leveraging the capabilities of Spring Data JPA.
 - **RESTful Endpoints:** Facilitate effortless integration with other applications by exposing RESTful endpoints.
@@ -58,51 +58,51 @@ The motivation behind this project was to address the lack of documentation for 
    To retrieve details for a specific area, use the following endpoint:
    
    ```
-      GET /{city-name}
+      GET /area?province={province}&district={district}
    ```
 
 **Hourly Weather Data**
 
    
-   To get the hourly weather data for a area, use the following endpoints:
+   To get the hourly weather data for an area, use the following endpoints:
 
    - Get All Hourly Data
    
    ```
-      GET /{city-name}/hourly/all
+      GET /hourly/all?province={province}
    ```
    
    - Get Single Hourly Data
 
    ```
-      GET /{city-name}/hourly/{i}
+      GET /hourly/{i}?province={province}
    ```
 
 **Daily Weather Data**
 
    
-   To get the daily weather data for a area, use the following endpoints:
+   To get the daily weather data for an area, use the following endpoints:
 
    - Get All Daily Data
    
    ```
-      GET /{city-name}/daily/all
+      GET /daily/all?province={province}&district={district}
    ```
    
    - Get Single Daily Data
 
    ```
-      GET /{city-name}/daily/{i}
+      GET /daily/{i}?province={province}&district={district}
    ```
 
 **Forecast Data**
 
    
-   To get the forecast data for a area, use the following endpoint:
+   To get the forecast data for an area, use the following endpoint:
 
    
    ```
-      GET /{city-name}/forecast
+      GET /forecast?province={province}&district={district}
    ```
 
  ## Configuration
@@ -111,17 +111,17 @@ The motivation behind this project was to address the lack of documentation for 
    
    ```yaml
       server:
-  port: 8686
-spring:
-  datasource:
-      url: jdbc:postgresql://localhost:5432/city
-      username: postgres
-      password: postgres
-      driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
+        port: 8686
+      spring:
+        datasource:
+          url: jdbc:postgresql://localhost:5432/city
+          username: postgres
+          password: postgres
+          driver-class-name: org.postgresql.Driver
+        jpa:
+          hibernate:
             ddl-auto: update
-    open-in-view: false
+          open-in-view: false
    ```
 
 ## Contributing

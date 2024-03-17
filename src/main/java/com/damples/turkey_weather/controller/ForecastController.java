@@ -23,10 +23,9 @@ public class ForecastController {
         Forecast forecast;
         if (district != null) {
             forecast = forecastService.getForecastData(province, district);
-            return new ResponseEntity<>(forecast, HttpStatus.OK);
         } else {
             forecast = forecastService.getForecastData(province);
-            return new ResponseEntity<>(forecast, HttpStatus.OK);
         }
+        return new ResponseEntity<>(forecast, HttpStatus.OK);
     }
 }

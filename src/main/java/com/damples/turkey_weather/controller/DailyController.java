@@ -23,11 +23,10 @@ public class DailyController {
         List<Daily> dailyWeatherData;
         if (district != null) {
             dailyWeatherData = dailyService.getAllDailyData(province, district);
-            return new ResponseEntity<>(dailyWeatherData, HttpStatus.OK);
         } else {
             dailyWeatherData = dailyService.getAllDailyData(province);
-            return new ResponseEntity<>(dailyWeatherData, HttpStatus.OK);
         }
+        return new ResponseEntity<>(dailyWeatherData, HttpStatus.OK);
     }
     @GetMapping("/{i}")
     public ResponseEntity<Daily> getDailyByIndex(@RequestParam String province,

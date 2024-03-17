@@ -21,10 +21,9 @@ public class AreaController {
         Area areaDetails;
         if (district != null) {
             areaDetails = areaService.getAreaDetails(province.toLowerCase(), district.toLowerCase());
-            return new ResponseEntity<>(areaDetails, HttpStatus.OK);
         } else {
             areaDetails = areaService.getAreaDetails(province.toLowerCase());
-            return new ResponseEntity<>(areaDetails, HttpStatus.OK);
         }
+        return new ResponseEntity<>(areaDetails, HttpStatus.OK);
     }
 }
